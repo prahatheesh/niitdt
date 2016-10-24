@@ -17,7 +17,11 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
+import com.royaldao.Productdao;
+import com.royaldao.ProductdaoImpl;
+import com.royaldao.UserDAOImpl;
+import com.royaldao.Userdao;
+import com.royalmodel.Product;
 import com.royalmodel.User;
 
 @Configuration
@@ -43,6 +47,7 @@ public class ApplicationContextConfig {
 	     System.out.println("before");
 	     sessionBuilder.addAnnotatedClasses(User.class);
 	     System.out.println("after");
+	     sessionBuilder.addAnnotatedClasses(Product.class);
 	 	 	      return sessionBuilder.buildSessionFactory();
 	   }
 	 
@@ -55,7 +60,7 @@ public class ApplicationContextConfig {
 		   properties.put("hibernate.show-sql", "true");
 		   
 		   properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-		   properties.put("hibernate.hbm2ddl.auto", "create");
+		   properties.put("hibernate.hbm2ddl.auto", "update");
 		   
 		   
 		return properties;
@@ -68,7 +73,22 @@ public class ApplicationContextConfig {
 	       System.out.println("welcome");
 	       return transactionManager;
 	   }
-	   
+	
+
+	@Autowired
+	@Bean(name="udao")
+	   public Userdao getUserService()
+	   {
+		return new UserDAOImpl();
+	   }
+	
+	@Autowired
+	@Bean(name="pdao")
+	public Productdao getProductService()
+	{
+		return new ProductdaoImpl();
+	}
+
 	} 
 
 

@@ -10,11 +10,17 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USERS")
 public class User {
-  
-    private String username;
     @Id
+    private int id1;
+	private String username;
     private String password;
     private String email;
+	public int getId1() {
+		return id1;
+	}
+	public void setId1(int id1) {
+		this.id1 = id1;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -33,10 +39,4 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
- 
-   
-   
- 
-    // other getters and setters are hidden for brevity
- 
 }
